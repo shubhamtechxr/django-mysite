@@ -13,12 +13,12 @@ def index(request):
   
 
 def analyze(request):
-    djtext=request.GET.get('text','default')
-    removepunc=request.GET.get('removepunc','off')
-    fullcaps=request.GET.get('fullcaps','off')
-    newlineremover=request.GET.get('newlineremover','off')
-    extraspaceremover=request.GET.get('extraspaceremover','off')
-    countchar=request.GET.get('countchar','off')
+    djtext=request.POST.get('text','default')
+    removepunc=request.POST.get('removepunc','off')
+    fullcaps=request.POST.get('fullcaps','off')
+    newlineremover=request.POST.get('newlineremover','off')
+    extraspaceremover=request.POST.get('extraspaceremover','off')
+    countchar=request.POST.get('countchar','off')
 
 
     if removepunc == 'on':
@@ -41,7 +41,7 @@ def analyze(request):
     elif(newlineremover=='on'):
         analyzed=""
         for char in djtext:
-            if char!='\n':
+            if char!='\n' and char!='\r':
                 analyzed+=char
 
         params= {'purpose':'Removed newlines','analyzed_text':analyzed}
